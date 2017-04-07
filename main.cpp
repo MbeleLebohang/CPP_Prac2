@@ -12,6 +12,8 @@
  */
 
 #include <cstdlib>
+#include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -19,7 +21,18 @@ using namespace std;
  * 
  */
 int main(int argc, char** argv) {
-
-    return 0;
+    const char* fileName = "MRI.raw";
+    //char buffer[255];
+    ifstream fin(fileName);
+    unsigned char ch;
+    int i = 0;
+    while (fin >> ch){
+        cout << (unsigned int)ch << " ";
+        i++;
+    }
+    cout << endl;
+    cout << "i = " << i;
+    fin.close();
+    cin >> ch;
 }
 

@@ -13,6 +13,8 @@
 
 #include "VolImage.h"
 
+using namespace MBLLEB006;
+
 VolImage::VolImage() {
 }
 
