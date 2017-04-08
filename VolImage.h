@@ -1,56 +1,54 @@
-/* 
+/*
  * File:   VolImage.h
  * Author: Mbele Lebohang
  *
- * Created on 05 April 2017, 9:42 AM
+ * CSC3022H Assignment 2017 - VolImage
+ * VolImage class declaration
  */
 
-#include <string>
+// Standard includes
+#include <cstdlib>
+#include <iostream>
 #include <vector>
+
+// Join the std namespace
+using namespace std;
 
 #ifndef VOLIMAGE_H
 #define VOLIMAGE_H
 
-using namespace std;
 namespace MBLLEB006{
-	
 	class VolImage {
-	public:
-	    VolImage();
-	    VolImage(const VolImage& orig);
-	    virtual ~VolImage();
-	    
-	    /**
-	     * 
-	     * @param baseName
-	     * @return 
-	     */
-	    bool readImages(const std::string baseName);
-	    
-	    /**
-	     * 
-	     * @param sliceI
-	     * @param sliceJ
-	     * @param output_prefix
-	     */
-	    void diffmap(int sliceI, int sliceJ, std::string output_prefix);
-	    
-	    /**
-	     * 
-	     * @param sliceId
-	     * @param output_prefix
-	     */
-	    void extract(int sliceId, std::string output_prefix);
-	    
-	    /**
-	     * 
-	     * @return 
-	     */
-	    int VolImageSize(void);
-	private:
-		int width, height; // width and height of image stack
-		std::vector<unsigned char**> slices; // data for each slice, in order
+		public:
+	  		/** Default constructor for VolImage class */
+	  		VolImage ();
+
+	  		/** Default deconstructor for VolImage class */
+			~VolImage ();
+
+			/** Load slice from a with the basename.
+			    Returns true if loaded.
+			    Returns false not found. */
+			bool readImages (const string base_name);
+
+			/** compute difference map and write out. */
+			void diffmap(int sliceI, int sliceJ, string output_prefix);
+
+			/** extract slice sliceId and write to output. */
+			void extract(int sliceId, string output_prefix);
+
+			/** number of bytes uses to store image data bytes. */
+			int volImageSize(void); 
+
+			// TODO: add other methods for processing the VolImage
+
+		protected:
+
+	 	private:
+			int width, height, slice_count; // width and height of image stack
+			std::vector<unsigned char**> slices; // data for each slice, in order
+
 	};
 }
-#endif /* VOLIMAGE_H */
 
+#endif /* VOLIMAGE_H */

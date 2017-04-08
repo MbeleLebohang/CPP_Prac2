@@ -14,25 +14,43 @@
 #include <cstdlib>
 #include <iostream>
 #include <fstream>
+#include "VolImage.h"
 
 using namespace std;
+using namespace MBLLEB006;
 
 /*
  * 
  */
 int main(int argc, char** argv) {
-    const char* fileName = "MRI.raw";
-    //char buffer[255];
-    ifstream fin(fileName);
-    unsigned char ch;
-    int i = 0;
-    while (fin >> ch){
-        cout << (unsigned int)ch << " ";
-        i++;
+    const string image_base = "MRI";
+    VolImage v;
+    v.readImages(image_base);
+
+    return 0;
+    // check if a parameter was given for the name of the log file to use
+    /*if(argc == 6){
+        cout << "compute a difference map between images " 
+        << argv[3] << " and " << argv[4] << 
+        " and write this out to " << argv[5] << " file." << endl;
     }
-    cout << endl;
-    cout << "i = " << i;
-    fin.close();
-    cin >> ch;
+    else if (argc == 5) {
+        image_base = argv[1];
+        
+        if(image_base.substr(0,1) != "-"){
+            cout << "extract and write the slice with number " << argv[3] << " and write this out to " << argv[4] << " file." << endl;
+        }
+        else{
+            cout << "Unknown flag " << argv[1] << ". Please read README.md file." << endl;
+        }
+    }
+    else if (argc == 1)
+    {
+        cout << "Number of images: " << 122 <<endl;
+        cout << "Number of bytes required: " << 122*8 <<endl;
+    }
+    else{
+        cout << "Invalid number of arguments. Please read README.md file." <<endl;
+    }*/
 }
 
