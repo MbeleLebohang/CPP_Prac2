@@ -26,10 +26,18 @@ namespace MBLLEB006{
 	  		/** Default deconstructor for VolImage class */
 			~VolImage ();
 
-			/** Load slice from a with the basename.
+			/** Load slice from a with the basename files.
 			    Returns true if loaded.
 			    Returns false not found. */
 			bool readImages (const string base_name);
+                        
+                        /**
+                         * Read the loader slices from memory and write them
+                         * to output file.
+                         * @param output_name
+                         * @return 
+                         */
+                        bool writeImage(const string output_name);
 
 			/** compute difference map and write out. */
 			void diffmap(int sliceI, int sliceJ, string output_prefix);

@@ -26,12 +26,12 @@ VolImage::~VolImage() {
 }
 
 bool VolImage::readImages(const string baseName){
-	/*
-	 *	read the .data file
-	 * 	get the height, width and the slice_count
-	 */
-	ifstream data_file (baseName + ".data");
-	string line;
+    /*
+     *	read the .data file
+     * 	get the height, width and the slice_count
+     */
+    ifstream data_file (baseName + ".data");
+    string line;
 
     if(data_file.is_open()){
         data_file >> width; 
@@ -40,8 +40,7 @@ bool VolImage::readImages(const string baseName){
     }
 
     data_file.close();
-
-
+    
     /*
      * Read each slice and save it to the slice<vector>
      */
@@ -55,23 +54,47 @@ bool VolImage::readImages(const string baseName){
 
             image_height_array[h] = new u_char[width];        // row - place to put all chars
 
-            char* image_width_array = new char[width];
-            binary_file.read(image_width_array, width);     //read the whole width of bytes.
+            unsigned char* image_width_array = new unsigned char[width];
+            binary_file.read((char*)image_width_array, width);     //read the whole width of bytes.
 
             for(int w = 0; w < width; w++){
                 /* Each column (width piece). */
                 image_height_array[h][w] = image_width_array[w];
             } 
-            
             delete[] image_width_array;
-            slices.push_back(image_height_array);
-            binary_file.close();
-            return 0;      
-        }
+        }   
+        slices.push_back(image_height_array);
+        binary_file.close();      
     }
+    return 0;
+}
 
-	return 0;
+bool VolImage::writeImage(const string output_name){
+    int slice_index = 1;
+    
+    ofstream file_out;
+    file_out.open(output_name + ".raw", ios::out | ios::binary);
+    
+    u_char** slice = slices[slice_index];
+    
+    for(int h = 0; h < height; h++){
+        /* All the height levels(row) in the image. */
 
+        u_char* image_width_array = slice[h];        // row - place to put all chars
+
+
+        //read the whole width of bytes.
+        char* temp = new char[width];
+        for(int w = 0; w < width; w++){
+            /* Each column (width piece). */
+            temp[w] = image_width_array[w];
+
+        } 
+        file_out.write(temp, width);
+        delete[] temp;
+    }   
+    file_out.close();
+    return 1;    
 }
 /*
 

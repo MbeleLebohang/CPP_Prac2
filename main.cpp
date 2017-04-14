@@ -23,10 +23,17 @@ using namespace MBLLEB006;
  * 
  */
 int main(int argc, char** argv) {
-    const string image_base = "MRI";
+    const string image_base = "brain_mri_raws/MRI";
     VolImage v;
     v.readImages(image_base);
-
+    
+    cout << "Files read into memory correctly."<<endl;
+    
+    cout << "Writing to a file..."<<endl;
+    v.writeImage("output_test");
+    cout << "Done."<<endl;
+    
+    
     return 0;
     // check if a parameter was given for the name of the log file to use
     /*if(argc == 6){
