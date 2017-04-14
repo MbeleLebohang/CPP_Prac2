@@ -69,49 +69,42 @@ bool VolImage::readImages(const string baseName){
     return 0;
 }
 
-bool VolImage::writeImage(const string output_name){
-    int slice_index = 1;
+void VolImage::extract(int sliceId, string output_prefix){
     
-    ofstream file_out;
-    file_out.open(output_name + ".raw", ios::out | ios::binary);
-    
-    u_char** slice = slices[slice_index];
-    
-    for(int h = 0; h < height; h++){
-        /* All the height levels(row) in the image. */
-
-        u_char* image_width_array = slice[h];        // row - place to put all chars
-
-
-        //read the whole width of bytes.
-        char* temp = new char[width];
-        for(int w = 0; w < width; w++){
-            /* Each column (width piece). */
-            temp[w] = image_width_array[w];
-
-        } 
-        file_out.write(temp, width);
-        delete[] temp;
-    }   
-    file_out.close();
-    return 1;    
-}
-/*
-
-    const char* fileName = "MRI0.raw";
-    //char buffer[255];
-    ifstream fin(fileName, ios::in|ios::binary|ios::ate);
-    unsigned char ch;
-    int i = 0;
-    while (fin >> ch){
-        cout << (unsigned int)ch << " ";
-        i++;
+    if(sliceId >= slice_count){
+        cout << "slice Id out of range. Max slice index is " << slice_count - 1<<endl;
     }
-    cout << endl;
-    cout << "i = " << i;
-    fin.close();
-    cin >> ch;
-    return 0;
+    else{
+        ofstream file_out;
+        file_out.open(output_prefix + ".raw", ios::out | ios::binary);
 
-    *************************************/
+        u_char** slice = slices[sliceId];
+
+        for(int h = 0; h < height; h++){
+            /* All the height levels(row) in the image. */
+            u_char* image_width_array = slice[h];        // row - place to put all chars
+
+            //read the whole width of bytes.
+            char* temp = new char[width];
+            for(int w = 0; w < width; w++){
+                /* Each column (width piece). */
+                temp[w] = image_width_array[w];
+            } 
+            file_out.write(temp, width);
+            delete[] temp;
+        }   
+        file_out.close();
+        
+        /* Create a .data file for this results */
+        ofstream data_file;
+        data_file.open(output_prefix + ".data", ios::out);
+        if(data_file.is_open()){
+            data_file << width << " " << height << " " << 1;
+            data_file.close();
+        }
+        else{
+            cout << output_prefix + ".data could not be opened. Error occurred." << endl;
+        }
+    }
+}
 

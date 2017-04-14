@@ -30,7 +30,7 @@ int main(int argc, char** argv) {
     cout << "Files read into memory correctly."<<endl;
     
     cout << "Writing to a file..."<<endl;
-    v.writeImage("output_test");
+    
     cout << "Done."<<endl;
     
     
