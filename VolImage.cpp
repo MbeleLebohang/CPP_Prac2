@@ -24,6 +24,16 @@ VolImage::VolImage() {
 }
 
 VolImage::~VolImage() {
+    for(int sliceId = 0; sliceId < slice_count; sliceId++){
+        u_char** image = slices[sliceId];
+        
+        for(int h = 0; h < height; h++){
+            /* Delete every row in the slice */
+            delete [] image[h];
+        }
+        /* Delete the slice*/
+        delete[] image;
+    }    
 }
 
 bool VolImage::readImages(const string baseName){
