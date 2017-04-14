@@ -53,14 +53,6 @@ namespace MBLLEB006{
 	 	private:
 			int width, height, slice_count; // width and height of image stack
 			std::vector<unsigned char**> slices; // data for each slice, in order
-                        
-                        /**
-                         * Read the loader slices from memory and write them
-                         * to output file.
-                         * @param output_name
-                         * @return 
-                         */
-                        bool writeImage(const string output_name);
 
 	};
 }

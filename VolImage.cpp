@@ -175,3 +175,19 @@ void VolImage::extraCredit(int rowIndex, string output_prefix){
         cout << output_prefix + ".data could not be opened. Error occurred." << endl;
     }
 }
+
+int VolImage::volImageSize(void){
+    int size = 0;
+    
+    for(int sliceId = 0; sliceId < slice_count; sliceId++){
+        u_char** image = slices[sliceId];
+        
+        for(int h = 0; h < height; h++){
+            u_char* image_width = image[h];
+            for(int w = 0; w < width; w++){
+                size = size + sizeof(image_width[w]);
+            }
+        }
+    }        
+    return size;
+}

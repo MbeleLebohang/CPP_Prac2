@@ -38,7 +38,11 @@ int main(int argc, char** argv) {
     cout << "Done."<<endl;
     
     cout << "extra credit..."<<endl;
-    v.extraCredit(99, "extra_outfile");
+    v.extraCredit(10, "extra_outfile");
+    cout << "Done."<<endl;
+    
+    cout << "Calculating memory size..."<<endl;
+    cout << "This slices occupy:"<< v.volImageSize() << "bytes." <<endl;
     cout << "Done."<<endl;
     return 0;
     // check if a parameter was given for the name of the log file to use
