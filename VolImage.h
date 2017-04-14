@@ -47,6 +47,8 @@ namespace MBLLEB006{
                          * @param output_prefix
                          */
                         void extraCredit(int rowIndex, string output_prefix);
+                        
+                        int getSliceCount(void);
 
 		protected:
 

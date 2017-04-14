@@ -23,37 +23,17 @@ using namespace MBLLEB006;
  * 
  */
 int main(int argc, char** argv) {
-    const string image_base = "brain_mri_raws/MRI";
-    VolImage v;
-    v.readImages(image_base);
+    const string image_base = argv[1];
+    VolImage volume;
+    volume.readImages(image_base);
     
-    cout << "Files read into memory correctly."<<endl;
-    
-    cout << "Extract slice I and write to extract.raw..."<<endl;
-    v.extract(10,"extract");
-    cout << "Done."<<endl;
-    
-    cout << "Find difference in a file..."<<endl;
-    v.diffmap(9,9, "diff_outfile");
-    cout << "Done."<<endl;
-    
-    cout << "extra credit..."<<endl;
-    v.extraCredit(10, "extra_outfile");
-    cout << "Done."<<endl;
-    
-    cout << "Calculating memory size..."<<endl;
-    cout << "This slices occupy:"<< v.volImageSize() << "bytes." <<endl;
-    cout << "Done."<<endl;
-    return 0;
     // check if a parameter was given for the name of the log file to use
-    /*if(argc == 6){
+    if(argc == 6){
         cout << "compute a difference map between images " 
         << argv[3] << " and " << argv[4] << 
         " and write this out to " << argv[5] << " file." << endl;
     }
     else if (argc == 5) {
-        image_base = argv[1];
-        
         if(image_base.substr(0,1) != "-"){
             cout << "extract and write the slice with number " << argv[3] << " and write this out to " << argv[4] << " file." << endl;
         }
@@ -68,6 +48,6 @@ int main(int argc, char** argv) {
     }
     else{
         cout << "Invalid number of arguments. Please read README.md file." <<endl;
-    }*/
+    }
 }
 

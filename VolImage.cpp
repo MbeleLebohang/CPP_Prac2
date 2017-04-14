@@ -201,3 +201,6 @@ int VolImage::volImageSize(void){
     }        
     return size;
 }
+int VolImage::getSliceCount(){
+    return slice_count;
+}
