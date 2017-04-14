@@ -34,7 +34,7 @@ int main(int argc, char** argv) {
     cout << "Done."<<endl;
     
     cout << "Find difference in a file..."<<endl;
-    v.diffmap(10,9, "diff_outfile");
+    v.diffmap(9,9, "diff_outfile");
     cout << "Done."<<endl;
     
     

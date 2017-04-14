@@ -133,6 +133,16 @@ void VolImage::diffmap(int sliceI, int sliceJ, string output_prefix){
         }   
         file_out.close();
     }
-
+    
+    /* Create a .data file for this results */
+    ofstream data_file;
+    data_file.open(output_prefix + ".data", ios::out);
+    if(data_file.is_open()){
+        data_file << width << " " << height << " " << 1;
+        data_file.close();
+    }
+    else{
+        cout << output_prefix + ".data could not be opened. Error occurred." << endl;
+    }
 }
 
