@@ -29,8 +29,12 @@ int main(int argc, char** argv) {
     
     cout << "Files read into memory correctly."<<endl;
     
-    cout << "Writing to a file..."<<endl;
+    cout << "Extract slice I and write to extract.raw..."<<endl;
+    v.extract(10,"extract");
+    cout << "Done."<<endl;
     
+    cout << "Find difference in a file..."<<endl;
+    v.diffmap(10,9, "diff_outfile");
     cout << "Done."<<endl;
     
     

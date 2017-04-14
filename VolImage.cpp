@@ -15,6 +15,7 @@
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
+#include <cmath>
 
 using namespace MBLLEB006;
 using namespace std;
@@ -106,5 +107,32 @@ void VolImage::extract(int sliceId, string output_prefix){
             cout << output_prefix + ".data could not be opened. Error occurred." << endl;
         }
     }
+}
+
+void VolImage::diffmap(int sliceI, int sliceJ, string output_prefix){
+    
+    if((sliceI >= slice_count) || (sliceJ >= slice_count)){
+        cout << "slice Id out of range. Max slice index is " << slice_count - 1<<endl;
+    }
+    else{
+        /* 2D raw files*/
+        ofstream file_out;
+        file_out.open(output_prefix + ".raw", ios::out | ios::binary);
+
+        for(int h = 0; h < height; h++){
+            /* All the height levels(row) in the image. */
+
+            //read the whole width of bytes.
+            char* temp = new char[width];
+            for(int w = 0; w < width; w++){
+                /* Each column (width piece). */
+                temp[w] = (unsigned char)(abs((float)slices[sliceI][h][w] - (float)slices[sliceJ][h][w])/2);
+            } 
+            file_out.write(temp, width);
+            delete[] temp;
+        }   
+        file_out.close();
+    }
+
 }
 
