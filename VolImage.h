@@ -40,7 +40,13 @@ namespace MBLLEB006{
 			/** number of bytes uses to store image data bytes. */
 			int volImageSize(void); 
 
-			// TODO: add other methods for processing the VolImage
+			/**
+                         * extracts an image along rowIndex of the volume, 
+                         * across all slices, and write this to output.
+                         * @param rowIndex
+                         * @param output_prefix
+                         */
+                        void extraCredit(int rowIndex, string output_prefix);
 
 		protected:
 

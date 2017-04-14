@@ -37,7 +37,9 @@ int main(int argc, char** argv) {
     v.diffmap(9,9, "diff_outfile");
     cout << "Done."<<endl;
     
-    
+    cout << "extra credit..."<<endl;
+    v.extraCredit(99, "extra_outfile");
+    cout << "Done."<<endl;
     return 0;
     // check if a parameter was given for the name of the log file to use
     /*if(argc == 6){

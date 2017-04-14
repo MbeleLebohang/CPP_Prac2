@@ -146,3 +146,32 @@ void VolImage::diffmap(int sliceI, int sliceJ, string output_prefix){
     }
 }
 
+void VolImage::extraCredit(int rowIndex, string output_prefix){
+    ofstream file_out;
+    file_out.open(output_prefix + ".raw", ios::out | ios::binary);
+    
+    for(int sliceId = 0; sliceId < slice_count; sliceId++){
+        /* For all the slices.*/
+        
+        u_char* image_row = slices[sliceId][rowIndex]; // Get the required row
+        
+        if(file_out.is_open()){
+            file_out.write((char*)image_row, width);
+        }   
+        else{
+            cout << output_prefix + ".raw could not be opened. Error occurred." << endl;
+        }
+    }
+    file_out.close();
+    
+    /* Create a .data file for this results */
+    ofstream data_file;
+    data_file.open(output_prefix + ".data", ios::out);
+    if(data_file.is_open()){
+        data_file << width << " " << slice_count << " " << 1;
+        data_file.close();
+    }
+    else{
+        cout << output_prefix + ".data could not be opened. Error occurred." << endl;
+    }
+}
