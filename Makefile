@@ -19,6 +19,8 @@ VolImage.o: VolImage.cpp VolImage.h
 clean:
 	rm -f bin/*.o 
 	rm -f ./*.o
+	rm  ./volImage
+	
 # type make depend to build dependencies
 depend:
 	$(CC) -M $(SOURCES) > incl.defs

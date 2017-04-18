@@ -11,9 +11,6 @@
 #include <iostream>
 #include <vector>
 
-// Join the std namespace
-using namespace std;
-
 #ifndef VOLIMAGE_H
 #define VOLIMAGE_H
 
@@ -29,13 +26,13 @@ namespace MBLLEB006{
 			/** Load slice from a with the basename files.
 			    Returns true if loaded.
 			    Returns false not found. */
-			bool readImages (const string base_name);
+			bool readImages (const std::string base_name);
                         
 			/** compute difference map and write out. */
-			void diffmap(int sliceI, int sliceJ, string output_prefix);
+			void diffmap(int sliceI, int sliceJ, std::string output_prefix);
 
 			/** extract slice sliceId and write to output. */
-			void extract(int sliceId, string output_prefix);
+			void extract(int sliceId, std::string output_prefix);
 
 			/** number of bytes uses to store image data bytes. */
 			int volImageSize(void); 
@@ -46,7 +43,7 @@ namespace MBLLEB006{
                          * @param rowIndex
                          * @param output_prefix
                          */
-                        void extraCredit(int rowIndex, string output_prefix);
+                        void extraCredit(int rowIndex, std::string output_prefix);
                         
                         int getSliceCount(void);
 
